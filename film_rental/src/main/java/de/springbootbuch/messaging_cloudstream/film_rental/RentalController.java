@@ -31,11 +31,11 @@ public class RentalController {
 	
 	private final InventoryRepository inventoryRepository;
 	
-	private final Source amqpTemplate;
+	private final Source source;
 
-	public RentalController(InventoryRepository inventoryRepository, Source amqpTemplate) {
+	public RentalController(InventoryRepository inventoryRepository, Source source) {
 		this.inventoryRepository = inventoryRepository;
-		this.amqpTemplate = amqpTemplate;
+		this.source = source;
 	}
 
 	@PostMapping("/returnedFilms")
@@ -46,7 +46,7 @@ public class RentalController {
 			this.inventoryRepository
 				.save(new FilmInStore(returnedFilm.getTitle()));
 
-		amqpTemplate.output().send(MessageBuilder.withPayload(new FilmReturnedEvent(
+		source.output().send(MessageBuilder.withPayload(new FilmReturnedEvent(
 				filmInStore.getId(), 
 				filmInStore.getTitle()
 			)).build());
