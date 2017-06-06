@@ -2,6 +2,7 @@ package de.springbootbuch.messaging_cloudstream.film_rental;
 
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,14 +42,18 @@ public class RentalController {
 	@PostMapping("/returnedFilms")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void returnFilm(
-		@RequestBody ReturnedFilm returnedFilm) {
+		@RequestBody ReturnedFilm returnedFilm
+	) {
 		final FilmInStore filmInStore = 
 			this.inventoryRepository
 				.save(new FilmInStore(returnedFilm.getTitle()));
 
-		source.output().send(MessageBuilder.withPayload(new FilmReturnedEvent(
-				filmInStore.getId(), 
-				filmInStore.getTitle()
-			)).build());
+		final Message<FilmReturnedEvent> message 
+			= MessageBuilder
+				.withPayload(new FilmReturnedEvent(
+					filmInStore.getId(), 
+					filmInStore.getTitle()
+			)).build();
+		source.output().send(message);
 	}
 }

@@ -24,7 +24,9 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-stream-dependencies</artifactId>
+				<artifactId>
+					spring-cloud-stream-dependencies
+				</artifactId>
 				<version>Elmhurst.BUILD-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -39,7 +41,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+			<artifactId>
+				spring-cloud-starter-stream-rabbit
+			</artifactId>
 		</dependency>
 	</dependencies>
 
