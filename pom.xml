@@ -9,7 +9,7 @@
 	</parent>
 
 	<properties>
-		<spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>
+		<spring-cloud.version>Finchley.M8</spring-cloud.version>
 	</properties>
 
 	<groupId>de.springbootbuch</groupId>
