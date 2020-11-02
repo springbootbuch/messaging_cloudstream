@@ -2,10 +2,14 @@ package de.springbootbuch.messaging_cloudstream.film_rental;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.springbootbuch.messaging_cloudstream.film_rental.RentalController.ReturnedFilm;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +17,7 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.http.MediaType;
 import org.springframework.messaging.Message;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Michael J. Simons
  * @author @rotnroll666
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 public class RentalControllerTest {
@@ -62,8 +66,7 @@ public class RentalControllerTest {
 
 		assertThat(
 			objectMapper.readTree(received.getPayload())
-				.get("title").asText(),
-			equalTo("test")
-		);
+				.get("title").asText())
+			.isEqualTo("test");
 	}
 }
