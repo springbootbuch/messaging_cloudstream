@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.springbootbuch.messaging_cloudstream.film_rental.RentalController.ReturnedFilm;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
